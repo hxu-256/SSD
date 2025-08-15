@@ -1,7 +1,7 @@
 clc; 
 % %% Test single file
 img1 = double(HR_RHSI); img2 = double(R_hsi);
-% Using % for SLNET and AUNET
+% Using % for SLNET and AUNET (No not use global norm for these methods)
 img1 = (img1 - min(img1(:))) ./ (max(img1(:)) - min(img1(:)));
 img2 = (img2 - min(img2(:))) ./ (max(img2(:)) - min(img2(:)));
 
