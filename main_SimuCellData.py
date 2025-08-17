@@ -29,10 +29,10 @@ def main_Raman_De(data_name, args):
         os.makedirs(result_dir)
 
     data = sio.loadmat(dataset_dir + data_name + '.mat')
-    GT_data_tensor = torch.from_numpy(data['HR_RHSI'])[:, :, 0:1101].float().to(device).unsqueeze(0).permute(0, 3, 1, 2)
+    GT_data_tensor = torch.from_numpy(data['HR_RHSI']).float().to(device).unsqueeze(0).permute(0, 3, 1, 2)
     GT_data_tensor = (GT_data_tensor - torch.min(GT_data_tensor)) / (torch.max(GT_data_tensor) - torch.min(GT_data_tensor))
 
-    meas_data = torch.from_numpy(data['Noisy_RHSI_30'])[:, :, 0:1101].float().to(device).unsqueeze(0)
+    meas_data = torch.from_numpy(data['Noisy_RHSI_30']).float().to(device).unsqueeze(0)
     meas_data_tensor = meas_data.permute(0, 3, 1, 2)/args.scale
     meas_data_tensor = (meas_data_tensor - torch.min(meas_data_tensor)) / (torch.max(meas_data_tensor) - torch.min(meas_data_tensor))
 
