@@ -74,7 +74,7 @@ if __name__ == '__main__':
     parser.add_argument('--Dataset',      default = 'Real',         help="Choose test dataset: Real")
     parser.add_argument('--noise_type',   default = 'Noisy_RHSI',   help="Choose test nois data")
     parser.add_argument('--PnP_i',        default = 1,              help="State of solo or PnP model")
-    parser.add_argument('--vis_plot',     default = 1,              help="State of plot spectrum")
+    parser.add_argument('--vis_plot',     default = 0,              help="State of plot spectrum")
     parser.add_argument('--iter_num',     default = 20,             help="Number of ADMM iterations")
     parser.add_argument('--Epoc_num',     default = 1200,           help="Number of MSD iterations")
     parser.add_argument('--scale',        default = 2.0,            help="Factor of scaling mesurements")
@@ -100,9 +100,9 @@ if __name__ == '__main__':
             args.lambda_R, args.lambda_STV, args.lambda_D = 0.7, 0.2, 0.8
         elif file_name == 'PS_ball_data_532':
             # --------  PS_ball_data_532 include: Noisy_RHSI_100 (0.01s) to Noisy_RHSI_1000 (0.001s) -------- #
-            args.noise_type = 'Noisy_RHSI_100'
-            args.scale = 162    # 162 (Noisy_RHSI_100) / 79 (Noisy_RHSI_100)
-            args.lambda_R, args.lambda_STV, args.lambda_D = 0.4, 0.2, 0.8
+            args.noise_type = 'Noisy_RHSI_1000'
+            args.scale = 79    # 162 (Noisy_RHSI_100) / 79 (Noisy_RHSI_100)
+            args.lambda_R, args.lambda_STV, args.lambda_D = 0.1, 0.2, 0.8
         elif file_name == 'Tablet1_64x64_50x':
             # --------          Tablet1_64x64_50x include: Noisy_RHSI (0.001s) / HR_RHSI (1s)        -------- #
             args.scale = 168
