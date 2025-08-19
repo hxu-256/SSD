@@ -77,7 +77,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.Dataset   == 'Simu':
-        data_list     =  ['Pattern_data'] #'Pattern_data', 'Gaussian_data', 'Chessboard_data', 'PS_ball_data'
+        data_list     =  ['Pattern_data'] #'Pattern_data', 'Gaussian_data', 'Chessboard_data', 'PS_ball_data', 'CM_layer10'
     else:
         print("---------- Ensure the name of dataset ----------") 
 
@@ -90,6 +90,8 @@ if __name__ == '__main__':
             args.iter_num, args.lambda_R, args.lambda_STV, args.lambda_D = 30, 8.0, 0.2, 0.8
         elif file_name == 'Chessboard_data':
             args.iter_num, args.lambda_R, args.lambda_STV, args.lambda_D = 30, 5.0, 0.4, 0.8
+        elif file_name == 'CM_layer10':
+            args.lambda_S, args.lambda_R, args.lambda_STV, args.lambda_D = 1000, 0.05, 0.95, 0.95
         else:
             args.lambda_R, args.Epoc_num = parser.get_default('lambda_R'), parser.get_default('Epoc_num')
         

@@ -24,7 +24,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 def main_Raman_De(data_name, args):
     #----------------------- Data Configuration -----------------------#
-    dataset_dir = '../Data/Real_Data/'
+    dataset_dir = '../Raman_Denoising_Dataset/PSBall_data/PS_PMMA/Step1/'
     result_dir = './Results/RealScene/' + data_name + '/'
     if not os.path.exists(result_dir):
         os.makedirs(result_dir)
@@ -38,7 +38,7 @@ def main_Raman_De(data_name, args):
     except:
         # Without High-SNR Data
         print(20*'-', 'Test without HR_RHSI', 20*'-')
-        GT_data_tensor = torch.from_numpy(data['Noisy_RHSI']).float().to(device).unsqueeze(0).permute(0, 3, 1, 2)/args.scale
+        GT_data_tensor = torch.from_numpy(data[args.noise_type]).float().to(device).unsqueeze(0).permute(0, 3, 1, 2)/args.scale
         meas_data = GT_data_tensor
         meas_data_tensor = GT_data_tensor
     
@@ -72,6 +72,7 @@ def main_Raman_De(data_name, args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--Dataset',      default = 'Real',         help="Choose test dataset: Real")
+    parser.add_argument('--noise_type',   default = 'Noisy_RHSI',   help="Choose test nois data")
     parser.add_argument('--PnP_i',        default = 1,              help="State of solo or PnP model")
     parser.add_argument('--vis_plot',     default = 1,              help="State of plot spectrum")
     parser.add_argument('--iter_num',     default = 20,             help="Number of ADMM iterations")
@@ -85,39 +86,42 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.Dataset   == 'Real':
-        data_list     =  ['Cell_Paramecium'] #'Cell_2DScene', 'Cell_Paramecium', 'Cell_ParameciumS2', 'PS_ball', 'Tablet1_64x64_50x', 'Tablet1_128x128_10x', 'Tablet1_linescan'
+        # 'Cell_2DScene', 'Cell_Paramecium', 'Cell_ParameciumS2',
+        # 'PS_ball', 'PS_ball_data_532'
+        # 'Tablet1_64x64_50x', 'Tablet1_128x128_10x', 'Tablet1_linescan'
+        data_list     =  ['PS_ball_data_532'] 
     else:
         print("---------- Ensure the name of dataset ----------") 
 
     for file_name in data_list:
-        # --------          PS_ball include: Noisy_RHSI (10% Laser) / HR_RHSI (100% Laser)       -------- #
         if file_name == 'PS_ball':
+            # --------          PS_ball include: Noisy_RHSI (10% Laser) / HR_RHSI (100% Laser)       -------- #
             args.scale = 345.95
             args.lambda_R, args.lambda_STV, args.lambda_D = 0.7, 0.2, 0.8
-
-        # --------          Tablet1_64x64_50x include: Noisy_RHSI (0.001s) / HR_RHSI (1s)        -------- #
+        elif file_name == 'PS_ball_data_532':
+            # --------  PS_ball_data_532 include: Noisy_RHSI_100 (0.01s) to Noisy_RHSI_1000 (0.001s) -------- #
+            args.noise_type = 'Noisy_RHSI_100'
+            args.scale = 162    # 162 (Noisy_RHSI_100) / 79 (Noisy_RHSI_100)
+            args.lambda_R, args.lambda_STV, args.lambda_D = 0.4, 0.2, 0.8
         elif file_name == 'Tablet1_64x64_50x':
+            # --------          Tablet1_64x64_50x include: Noisy_RHSI (0.001s) / HR_RHSI (1s)        -------- #
             args.scale = 168
             args.lambda_R, args.lambda_STV, args.lambda_D = 0.4, 0.3, 0.8
-
-        # --------         Tablet1_128x128_10x include: Noisy_RHSI (0.01s) / HR_RHSI (0.1s)       ------- #
         elif file_name == 'Tablet1_128x128_10x':
+            # --------         Tablet1_128x128_10x include: Noisy_RHSI (0.01s) / HR_RHSI (0.1s)       ------- #
             args.scale = 926.4
             args.lambda_R, args.lambda_STV, args.lambda_D = 0.01, 0.01, 0.8
-
-        # --------           Tablet1_linescan include: Noisy_RHSI (0.3s) / HR_RHSI (1s)          -------- #
         elif file_name == 'Tablet1_linescan':
+            # --------           Tablet1_linescan include: Noisy_RHSI (0.3s) / HR_RHSI (1s)          -------- #
             args.scale = 1
             args.Epoc_num, args.lambda_R, args.lambda_STV, args.lambda_D = 400, 0.01, 0.2, 1.1  # For 1s
             #args.Epoc_num, args.lambda_R, args.lambda_STV, args.lambda_D = 100, 0.1, 0.3, 1.1 # For 0.3s
-
-        # --------             Cell_2DScene include: Noisy_RHSI (0.1s) / HR_RHSI (1s)             -------- #
         elif file_name == 'Cell_2DScene':
+            # --------             Cell_2DScene include: Noisy_RHSI (0.1s) / HR_RHSI (1s)             -------- #
             args.scale = 227
             args.lambda_R, args.lambda_STV, args.lambda_D = 0.1, 2.0, 0.8
-            
-        # ------------------ Cell_Paramecium include: HR_RHSI (0.1s) / Noisy_RHSI (0.01s) ---------------- #
         elif file_name == 'Cell_Paramecium' or 'Cell_ParameciumS2':
+            # ------------------ Cell_Paramecium include: HR_RHSI (0.1s) / Noisy_RHSI (0.01s) ---------------- #
             args.scale = 100
             args.lambda_R, args.lambda_STV, args.lambda_D = 0.1, 0.3, 0.8
 
