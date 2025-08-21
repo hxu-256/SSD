@@ -24,7 +24,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 def main_Raman_De(data_name, args):
     #----------------------- Data Configuration -----------------------#
-    dataset_dir = '../Raman_Denoising_Dataset/Real_data/'
+    dataset_dir = '../Raman_Denoising_Dataset/PSBall_data/PS_PMMA/'
     result_dir = './Results/RealScene/' + data_name + '/'
     if not os.path.exists(result_dir):
         os.makedirs(result_dir)
@@ -87,10 +87,10 @@ if __name__ == '__main__':
 
     if args.Dataset   == 'Real':
         # 'Cell_2DScene', 'Cell_Paramecium', 'Cell_ParameciumS2',
-        # 'PS_ball', 'PS_ball_data_532', 'PS_ball_data_633', 'PS_PMMA', 'PMMA'
+        # 'PS_ball', 'PS_ball_data_532', 'PS_ball_data_633', 'PS_PMMA'
         # 'PS_ball_data_488_WiTec', 'PS_ball_data_633_WiTec'
         # 'Tablet1_64x64_50x', 'Tablet1_128x128_10x', 'Tablet1_linescan'
-        data_list     =  ['PS_ball'] 
+        data_list     =  ['PS_PMMA'] 
     else:
         print("---------- Ensure the name of dataset ----------") 
 
@@ -112,13 +112,8 @@ if __name__ == '__main__':
         elif file_name == 'PS_PMMA':
             # --------                     PS_PMMA include: Noisy_RHSI_10 (0.1s)                     -------- #
             args.noise_type = 'Noisy_RHSI_10'
-            args.scale = 702
+            args.scale = 138
             args.lambda_R, args.lambda_STV, args.lambda_D = 0.1, 0.4, 0.8
-        elif file_name == 'PMMA':
-            # --------                       PMMA include: Noisy_RHSI_10 (0.1s)                      -------- #
-            args.noise_type = 'Noisy_RHSI_10'
-            args.scale = 677
-            args.lambda_R, args.lambda_STV, args.lambda_D = 0.1, 0.2, 0.8
         elif file_name == 'PS_ball_data_488_WiTec':
             # --------            PS_ball_data_488_WiTec include: Noisy_RHSI_10 (0.1s)               -------- #
             args.noise_type = 'Noisy_RHSI_10'
