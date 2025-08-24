@@ -77,7 +77,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.Dataset   == 'Simu':
-        data_list     =  ['Pattern_data'] #'Pattern_data', 'Gaussian_data', 'Chessboard_data', 'PS_ball_data', 'CM_layer10'
+        data_list     =  ['Chessboard_data'] #'Pattern_data', 'Gaussian_data', 'Chessboard_data', 'PS_ball_data', 'CM_layer10'
     else:
         print("---------- Ensure the name of dataset ----------") 
 
