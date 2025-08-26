@@ -1,5 +1,7 @@
+import math
 import torch
 import torch.nn as nn
+import torch.nn.init as init
 import torch.nn.functional as F
 from Networks.common import *
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -59,6 +61,28 @@ class Network(nn.Module):
             self.ups.append(nn.Upsample(scale_factor=2, mode=upsample_mode[i]))
         self.recon_head = conv(num_channels_up[-1], num_output_channels, 1, bias=need_bias, pad=pad)
 
+        #self.initialize_weights()
+        
+    def initialize_weights(self, method='xavier'):
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d) or isinstance(m, nn.Linear):
+                if method == 'kaiming':
+                    #init.kaiming_normal_(m.weight, nonlinearity='leaky_relu')
+                    init.kaiming_uniform_(m.weight, a=math.sqrt(5), mode='fan_in', nonlinearity='leaky_relu')
+                elif method == 'xavier':
+                    init.xavier_normal_(m.weight)
+                    #init.xavier_uniform_(m.weight)
+                elif method == 'orthogonal':
+                    init.orthogonal_(m.weight)
+                elif method == 'normal':
+                    init.normal_(m.weight, mean=0.0, std=0.02)
+                else:
+                    raise ValueError(f"Unknown initialization method: {method}")
+                if m.bias is not None:
+                    init.constant_(m.bias, 0)
+            elif isinstance(m, nn.BatchNorm2d):
+                init.constant_(m.weight, 1)
+                init.constant_(m.bias, 0)
 
     def forward(self, x, x_mean=None):
         nC = x.shape[1]
