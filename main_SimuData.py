@@ -69,7 +69,7 @@ if __name__ == '__main__':
     parser.add_argument('--iter_num',     default = 30,             help="Number of ADMM iterations")
     parser.add_argument('--Epoc_num',     default = 1200,           help="Number of MSD iterations")
     parser.add_argument('--scale',        default = 1.0,            help="Factor of scaling mesurements")
-    parser.add_argument('--rho',          default = 10,             help="Factor of dual variable")
+    parser.add_argument('--rho',          default = 1,             help="Factor of dual variable")
     parser.add_argument('--lambda_S',     default = 10,             help="Factor of sparse noise")
     parser.add_argument('--lambda_R',     default = 4.0,            help="Factor of TV/STV regularization")
     parser.add_argument('--lambda_STV',   default = 0.4,            help="Ratio of STV regularization")
@@ -83,13 +83,13 @@ if __name__ == '__main__':
 
     for file_name in data_list:
         if file_name == 'PS_ball_data':
-            args.lambda_S, args.iter_num, args.lambda_R, args.lambda_STV, args.lambda_D = 1000, 30, 0.05, 0.2, 0.8
+            args.lambda_S, args.iter_num, args.lambda_R, args.lambda_STV = 1000, 30, 0.05, 0.2
         elif file_name == 'Pattern_data':
-            args.iter_num, args.lambda_R, args.lambda_STV, args.lambda_D = 40, 6.0, 0.4, 0.8
+            args.iter_num, args.lambda_R  = 40, 6.0
         elif file_name == 'Gaussian_data':
-            args.iter_num, args.lambda_R, args.lambda_STV, args.lambda_D = 30, 8.0, 0.2, 0.8
+            args.iter_num, args.lambda_R, args.lambda_STV = 30, 8.0
         elif file_name == 'Chessboard_data':
-            args.iter_num, args.lambda_R, args.lambda_STV, args.lambda_D = 30, 5.0, 0.4, 0.8
+            args.iter_num, args.lambda_R = 30, 5.0, 0.4
         else:
             args.lambda_R, args.Epoc_num = parser.get_default('lambda_R'), parser.get_default('Epoc_num')
         

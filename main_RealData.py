@@ -98,40 +98,40 @@ if __name__ == '__main__':
         if file_name == 'PS_ball':
             # --------          PS_ball include: Noisy_RHSI (10% Laser) / HR_RHSI (100% Laser)       -------- #
             args.scale = 345.95
-            args.lambda_R, args.lambda_STV, args.lambda_D = 0.7, 0.2, 0.8
+            args.lambda_R = 0.7
         elif file_name == 'PS_ball_data_532':
             # --------                 PS_ball_data_532 include: Noisy_RHSI_100 (0.01s)              -------- #
             args.noise_type = 'Noisy_RHSI_100'
             args.scale = 162
-            args.lambda_R, args.lambda_STV, args.lambda_D = 0.1, 0.2, 0.8
+            args.lambda_R = 0.1
         elif file_name == 'PS_ball_data_633':
             # --------                 PS_ball_data_633 include: Noisy_RHSI_100 (0.01s)              -------- #
             args.noise_type = 'Noisy_RHSI_100_50Laser'
             args.scale = 162
-            args.lambda_R, args.lambda_STV, args.lambda_D = 0.1, 0.3, 0.8
+            args.lambda_R, args.lambda_STV = 0.1, 0.3
         elif file_name == 'PS_PMMA':
             # --------                     PS_PMMA include: Noisy_RHSI_10 (0.1s)                     -------- #
             args.noise_type = 'Noisy_RHSI_10'
             args.scale = 138
-            args.lambda_R, args.lambda_STV, args.lambda_D = 0.1, 0.4, 0.8
+            args.lambda_R, args.lambda_STV = 0.1, 0.4
         elif file_name == 'PS_ball_data_488_WiTec':
             # --------            PS_ball_data_488_WiTec include: Noisy_RHSI_10 (0.1s)               -------- #
             args.noise_type = 'Noisy_RHSI_10'
             args.scale = 1756
-            args.lambda_R, args.lambda_STV, args.lambda_D = 0.3, 0.2, 0.8
+            args.lambda_R = 0.3
         elif file_name == 'PS_ball_data_633_WiTec':
             # --------            PS_ball_data_633_WiTec include: Noisy_RHSI_10 (0.1s)               -------- #
             args.noise_type = 'Noisy_RHSI_10'
             args.scale = 2388
-            args.lambda_R, args.lambda_STV, args.lambda_D = 0.7, 0.2, 0.8
+            args.lambda_R = 0.7
         elif file_name == 'Tablet1_64x64_50x':
             # --------          Tablet1_64x64_50x include: Noisy_RHSI (0.001s) / HR_RHSI (1s)        -------- #
             args.scale = 168
-            args.lambda_R, args.lambda_STV, args.lambda_D = 0.4, 0.3, 0.8
+            args.lambda_R, args.lambda_STV = 0.4, 0.3
         elif file_name == 'Tablet1_128x128_10x':
             # --------         Tablet1_128x128_10x include: Noisy_RHSI (0.01s) / HR_RHSI (0.1s)       ------- #
             args.scale = 926.4
-            args.lambda_R, args.lambda_STV, args.lambda_D = 0.01, 0.01, 0.8
+            args.lambda_R, args.lambda_STV = 0.01, 0.01
         elif file_name == 'Tablet1_linescan':
             # --------           Tablet1_linescan include: Noisy_RHSI (0.3s) / HR_RHSI (1s)          -------- #
             args.scale = 1
@@ -140,11 +140,11 @@ if __name__ == '__main__':
         elif file_name == 'Cell_2DScene':
             # --------             Cell_2DScene include: Noisy_RHSI (0.1s) / HR_RHSI (1s)             -------- #
             args.scale = 227
-            args.lambda_R, args.lambda_STV, args.lambda_D = 0.1, 2.0, 0.8
+            args.lambda_R, args.lambda_STV = 0.1, 2.0
         elif file_name == 'Cell_Paramecium' or 'Cell_ParameciumS2':
             # ------------------ Cell_Paramecium include: HR_RHSI (0.1s) / Noisy_RHSI (0.01s) ---------------- #
             args.scale = 100
-            args.lambda_R, args.lambda_STV, args.lambda_D = 0.1, 0.3, 0.8
+            args.lambda_R, args.lambda_STV = 0.1, 0.3
 
         if os.path.exists('Results/model_weights.pth'):
             os.remove('Results/model_weights.pth')
