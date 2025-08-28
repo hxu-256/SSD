@@ -70,14 +70,14 @@ if __name__ == '__main__':
     parser.add_argument('--Epoc_num',     default = 1200,           help="Number of MSD iterations")
     parser.add_argument('--scale',        default = 1.0,            help="Factor of scaling mesurements")
     parser.add_argument('--rho',          default = 1,              help="Factor of dual variable")
-    parser.add_argument('--lambda_S',     default = 10,             help="Factor of sparse noise")
+    parser.add_argument('--lambda_S',     default = 1,              help="Factor of sparse noise")
     parser.add_argument('--lambda_R',     default = 5.0,            help="Factor of TV/STV regularization")
     parser.add_argument('--lambda_STV',   default = 0.4,            help="Ratio of STV regularization")
     parser.add_argument('--lambda_D',     default = 0.8,            help="Decay factor of lambda_R")
     args = parser.parse_args()
 
     if args.Dataset   == 'Simu':
-        data_list     =  ['Gaussian_data'] #'Pattern_data', 'Gaussian_data', 'Chessboard_data', 'PS_ball_data'
+        data_list     =  ['Pattern_data'] #'Pattern_data', 'Gaussian_data', 'Chessboard_data', 'PS_ball_data'
     else:
         print("---------- Ensure the name of dataset ----------") 
 
