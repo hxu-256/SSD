@@ -87,9 +87,7 @@ if __name__ == '__main__':
 
     if args.Dataset   == 'Real':
         # 'Cell_2DScene', 'Cell_Paramecium', 'Cell_ParameciumS2',
-        # 'PS_ball', 'PS_ball_data_532', 'PS_ball_data_633', 'PS_PMMA'
-        # 'PS_ball_data_488_WiTec', 'PS_ball_data_633_WiTec'
-        # 'Tablet1_64x64_50x', 'Tablet1_128x128_10x', 'Tablet1_linescan'
+        # 'PS_ball', 'Tablet1_64x64_50x', 'Tablet1_128x128_10x', 'Tablet1_linescan'
         data_list     =  ['Cell_Paramecium'] 
     else:
         print("---------- Ensure the name of dataset ----------") 
