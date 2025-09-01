@@ -41,4 +41,4 @@ mean(SAM_all)
 
 clear temp_spectral_1; clear temp_spectral_2; clear dot_product; clear norm_x;  clear norm_y;
 clear img1; clear img2; clear temp_img1; clear temp_img2; 
-clear H; clear  W; clear band; clear i; 
+clear H; clear  W; clear band; clear i;

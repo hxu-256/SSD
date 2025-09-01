@@ -23,7 +23,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 def main_Raman_De(data_name, args):
     #----------------------- Data Configuration -----------------------#
-    dataset_dir = '../Raman_Denoising_Dataset/Simu_Data/'
+    dataset_dir = '../Data/Simu_Data/'
     result_dir = './Results/SimuScene/' + data_name + '/'
     if not os.path.exists(result_dir):
         os.makedirs(result_dir)
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.Dataset   == 'Simu':
-        data_list     =  ['Pattern_data'] #'Pattern_data', 'Gaussian_data', 'Chessboard_data', 'PS_ball_data'
+        data_list     =  ['Chessboard_data'] #'Pattern_data', 'Gaussian_data', 'Chessboard_data', 'PS_ball_data'
     else:
         print("---------- Ensure the name of dataset ----------") 
 
