@@ -1,3 +1,5 @@
 Results/model_weights.pth
 /Results/SimuScene
 /Results/RealScene
+/Data/Real_Data
+/Data/Simu_Data

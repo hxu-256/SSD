@@ -23,7 +23,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 def main_Raman_De(data_name, args):
     #----------------------- Data Configuration -----------------------#
-    dataset_dir = '../Data/Simu_Data/'
+    dataset_dir = './Data/Simu_Data/'
     result_dir = './Results/SimuScene/' + data_name + '/'
     if not os.path.exists(result_dir):
         os.makedirs(result_dir)
